@@ -10,7 +10,7 @@ public class Dbconnection {
 
 	private static final String SCHEMA = "diy_projects";
 	private static final String USER = "diy_projects";
-	private static final String PASSWORD = "diy_projects";
+	private static final String PASSWORD = "DIY_projects...";
 	private static final String HOST = "localhost";
 	private static final int PORT = 3306;
 	
