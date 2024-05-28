@@ -4,7 +4,7 @@ drop table if exists step;
 drop table if exists material;
 DROP TABLE IF EXISTS project;
 
-CREATE TABLE project (
+CREATE table project (
 project_id INT NOT NULL,
 PRIMARY KEY (project_id),
 project_name VARCHAR(128) NOT NULL,
@@ -14,10 +14,36 @@ difficulty INT NULL,
 notes TEXT NULL
 );
 
-CREATE TABLE material ();
+create table material (
+material_id INT NOT NULL,
+PRIMARY KEY (material_id),
+project_id INT NOT NULL,
+FOREIGN KEY (project_id) references project(project_id),
+material_name VARCHAR(128) NOT NULL,
+num_required INT,
+cost DECIMAL(7,2)
+);
 
-CREATE TABLE step ();
+CREATE TABLE step (
+step_id INT NOT NULL,
+project_id INT NOT NULL,
+step_text TEXT NOT NULL,
+step_order INT NOT NULL,
+PRIMARY KEY (step_id),
+FOREIGN KEY (project_id) REFERENCES project(project_id)
+);
 
-CREATE TABLE category ();
+CREATE TABLE category (
+category_id INT NOT NULL,
+category_name VARCHAR(128) NOT NULL,
+PRIMARY KEY (category_id)
+);
 
-CREATE TABLE project_category ();
+CREATE TABLE project_category (
+project_id INT NOT NULL,
+category_id INT NOT NULL,
+UNIQUE (project_id),
+UNIQUE (category_id),
+FOREIGN KEY (project_id) REFERENCES project(project_id),
+FOREIGN KEY (category_id) REFERENCES category(category_id)
+);
