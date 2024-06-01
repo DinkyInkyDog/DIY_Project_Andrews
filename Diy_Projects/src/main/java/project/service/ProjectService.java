@@ -46,21 +46,38 @@ private static final String DATA_FILE = "project_data.sql";
  */
 	private List<String> convertContentToSQLStatments(String content) {
 		content = removeComments(content);
-		content = removeWhiteSpace();
+		content = removeWhiteSpace(content);
 		
 		return extractLinesFromContent(content);
-	return null;
+	
 }
 
-	
+	/**
+	 * @param content the string that now doesn't have any comments to 
+	 * worry about
+	 * @return a clean string that only has the code we wont in it.
+	 */
+	private String removeWhiteSpace(String content) {
+		return content.replaceAll("//s+", " ");
+	}
+
 	/**
 	 * 
 	 * @param content the string fresh from the readFile
 	 * @return a string without Comments
 	 */
 	private String removeComments(String content) {
-		
-	return null; 
+		StringBuilder build = new StringBuilder(content);
+		int commentPos = 0;
+		while((commentPos = build.indexOf("-- ", commentPos)) != -1) {
+			int eolPos = build.indexOf("/n", commentPos+1);
+			if (eolPos == -1) {
+				build.replace(commentPos, build.length(), "");
+			} else {
+				build.replace(commentPos, eolPos + 1 , "");
+			}
+		}
+	return build.toString(); 
 }
 
 	/**
