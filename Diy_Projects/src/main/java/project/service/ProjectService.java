@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 
 import project.dao.ProjectDao;
@@ -50,6 +51,27 @@ private static final String DATA_FILE = "project_data.sql";
 		
 		return extractLinesFromContent(content);
 	
+}
+/**
+ * 
+ * @param content fully clean string that just needs to be split up
+ * @return a list of individual strings that can be executed
+ */
+	private List<String> extractLinesFromContent(String content) {
+		List<String> lines = new LinkedList<String>();
+		while(!content.isEmpty()) {
+			int semicolon = content.indexOf(";");
+			if (semicolon == -1) {
+				if (!content.isBlank()) {
+					lines.add(content);
+				}
+				content = "";
+			} else {
+				lines.add(content.substring(0, semicolon).trim());
+				content = content.substring(semicolon+1);
+			}
+		}
+	return lines;
 }
 
 	/**
