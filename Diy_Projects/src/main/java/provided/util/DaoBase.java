@@ -33,7 +33,7 @@ public abstract class DaoBase {
    * @param conn The connection on which to start the transaction.
    * @throws SQLException Thrown if an error occurs starting the transaction.
    */
-  protected void startTransaction(Connection conn) throws SQLException {
+  protected static void startTransaction(Connection conn) throws SQLException {
     conn.setAutoCommit(false);
   }
 
@@ -43,7 +43,7 @@ public abstract class DaoBase {
    * @param conn The connection on which to commit the transaction.
    * @throws SQLException Thrown if an error occurs committing the transaction.
    */
-  protected void commitTransaction(Connection conn) throws SQLException {
+  protected static void commitTransaction(Connection conn) throws SQLException {
     conn.commit();
   }
 
@@ -53,7 +53,7 @@ public abstract class DaoBase {
    * @param conn The connection on which to roll back the transaction.
    * @throws SQLException Thrown if an error occurs rolling back the transaction.
    */
-  protected void rollbackTransaction(Connection conn) throws SQLException {
+  protected static void rollbackTransaction(Connection conn) throws SQLException {
     conn.rollback();
   }
 

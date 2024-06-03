@@ -19,7 +19,7 @@ public class Dbconnection {
 		System.out.println(url);
 		try {
 			Connection conn = DriverManager.getConnection(url);
-			System.out.println("Connection Successful!");
+			System.out.println("Connection Success!");
 			return conn;
 		} catch (SQLException e) {
 			System.out.println("Connection Failed.");

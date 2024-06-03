@@ -6,12 +6,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 import project.dao.ProjectDao;
 import project.exception.DbException;
 
 @SuppressWarnings("unused")
-public class ProjectService {
+public class ProjectService{
 
 private static final String SCHEMA_FILE = "project_schema.sql";
 private static final String DATA_FILE = "project_data.sql";
@@ -25,17 +26,19 @@ private static final String DATA_FILE = "project_data.sql";
 		loadFile(SCHEMA_FILE);
 		//loadFile(DATA_FILE);
 	}
+	
+	
 
 /**
  * 	
  * @param schemaFile sql file to load and execute
  */
-	private  void loadFile(String schemaFile) {
+	private void loadFile(String schemaFile) {
 		String content = readFileContent(schemaFile);
 		List<String> sqlStatements = convertContentToSQLStatments(content);
 		
-		ProjectDao.executeBatch(sqlStatements);
 		
+		ProjectDao.executeBatch(sqlStatements);	
 	}
 /**
  * 
@@ -107,7 +110,7 @@ private static final String DATA_FILE = "project_data.sql";
 	 * @param schemaFile the file name that we need
 	 * @return the String of all the content from the file Loaded as one big clump
 	 */
-private String readFileContent(String schemaFile) {
+	private String readFileContent(String schemaFile) {
 	try {
 		Path path = Paths.get(getClass().getClassLoader().getResource(schemaFile).toURI());
 		return Files.readString(path);
@@ -116,6 +119,15 @@ private String readFileContent(String schemaFile) {
 	}
 	
 }
+
+
+
+	
+
+	public static void addProject() {
+		Scanner scan = new Scanner(System.in);
+		
+	}
 	
 	
 }

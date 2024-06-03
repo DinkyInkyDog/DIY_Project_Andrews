@@ -1,47 +1,27 @@
 package project;
 
-
 import java.util.List;
 import java.util.Scanner;
 
-
-
-
-
-
-public class ProjectsApp {
-	private static Scanner scan = new Scanner(System.in);
-	
+public class application {
 
 	public static void main(String[] args) {
-		processUserInput(scan);
-		
+		Scanner scan = new Scanner(System.in);
 		
 	}
-	
-	
-	
-
-	public static void displayMenu(List<String> menu) {
-		for (String option : menu) {
-			System.out.println(option);
-		}
-	}	
-
-	public static void processUserInput(Scanner scan) {
+	public void processUserInput(Scanner scan) {
 		boolean done = false;
-		
+//		@formatter:off
 			List<String> operations = List.of(
 					"1) Add a Project",
 					"-1) Exit"
 					
 			);
-		
+		//	@formatter:on
 		
 		while (!done == false) {
 			System.out.println("Please select one of the following options by their number.");
 			displayMenu(operations);
-			System.out.print("input option");
 			String choice = scan.nextLine();
 				switch (choice) {
 				case "1": 
@@ -55,4 +35,10 @@ public class ProjectsApp {
 				}
 			}
  		}
+
+	public void displayMenu(List<String> menu) {
+		for (String option : menu) {
+			System.out.println(option);
+		}
+	}
 }
