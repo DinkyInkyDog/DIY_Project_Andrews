@@ -11,48 +11,53 @@ import java.util.Scanner;
 
 public class ProjectsApp {
 	private static Scanner scan = new Scanner(System.in);
-	
+	// @formatter:off
+	private List<String> operations = List.of(
+			"1) Create and Populate the Tables",
+			"2) Add Project",
+			"-1) Exit"
+			
+	);
+	// @formatter:on
 
 	public static void main(String[] args) {
-		processUserInput(scan);
-		
+		new ProjectsApp().displayMenu();
 		
 	}
 	
 	
-	
-
-	public static void displayMenu(List<String> menu) {
-		for (String option : menu) {
-			System.out.println(option);
-		}
-	}	
-
-	public static void processUserInput(Scanner scan) {
+	private void displayMenu() {
+		System.out.println();
 		boolean done = false;
 		
-			List<String> operations = List.of(
-					"1) Add a Project",
-					"-1) Exit"
-					
-			);
-		
-		
-		while (!done == false) {
-			System.out.println("Please select one of the following options by their number.");
-			displayMenu(operations);
-			System.out.print("input option");
-			String choice = scan.nextLine();
-				switch (choice) {
-				case "1": 
-					
-					continue;
-				case "-1":
-					done = true;
-					continue;
-				default:
-					System.out.println("Selection invalid. Please select a number from the menu.");
-				}
+		while(!done) {
+			int op = getOperation();
+			switch (op) {
+			case 1:
+				
 			}
- 		}
+		}
+	}
+
+/**
+ *  
+ * @return
+ */
+	private int getOperation() {
+		printOperations();
+		Integer op = getIntInput("enter the operation number(just enter to exit)");
+		
+		
+	}
+
+
+private void printOperations() {
+	System.out.println();
+	System.out.println("Here's what you can do:");
+	operations.forEach(op -> System.out.println(op));
+	
+	
+}
+
+
 }
