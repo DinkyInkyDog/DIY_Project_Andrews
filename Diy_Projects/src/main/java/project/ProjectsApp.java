@@ -25,7 +25,7 @@ public class ProjectsApp {
 	// @formatter:on
 
 	public static void main(String[] args) {
-		//new ProjectsApp().displayMenu();
+		new ProjectsApp().displayMenu();
 		
 	}
 	
