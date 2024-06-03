@@ -2,7 +2,11 @@ package project;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+
+import project.exception.DbException;
+
 
 
 
@@ -21,7 +25,7 @@ public class ProjectsApp {
 	// @formatter:on
 
 	public static void main(String[] args) {
-		new ProjectsApp().displayMenu();
+		//new ProjectsApp().displayMenu();
 		
 	}
 	
@@ -45,10 +49,30 @@ public class ProjectsApp {
  */
 	private int getOperation() {
 		printOperations();
-		Integer op = getIntInput("enter the operation number(just enter to exit)");
-		
+		int op = getIntInput("enter the operation number(just enter to exit)");
+		return Objects.isNull(op) ? -1 : op;
 		
 	}
+
+
+private Integer getIntInput(String string) {
+	String input = getStringInput();
+	if (Objects.isNull(input)) {
+		return null;
+	}
+	try {
+		return Integer.parseInt(input);
+	}catch (NumberFormatException e) {
+		throw new DbException(input + "is not a valid number.");
+	}
+	
+}
+
+
+private String getStringInput() {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 
 private void printOperations() {
