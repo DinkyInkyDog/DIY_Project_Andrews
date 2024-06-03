@@ -5,7 +5,7 @@ drop table if exists material;
 DROP TABLE IF EXISTS project;
 
 CREATE table project (
-project_id INT NOT NULL,
+project_id INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY (project_id),
 project_name VARCHAR(128) NOT NULL,
 estimated_hours DECIMAL(7,2) NULL,
@@ -15,7 +15,7 @@ notes TEXT NULL
 );
 
 create table material (
-material_id INT NOT NULL,
+material_id INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY (material_id),
 project_id INT NOT NULL,
 FOREIGN KEY (project_id) references project(project_id),
@@ -25,7 +25,7 @@ cost DECIMAL(7,2)
 );
 
 CREATE TABLE step (
-step_id INT NOT NULL,
+step_id INT NOT NULL AUTO_INCREMENT,
 project_id INT NOT NULL,
 step_text TEXT NOT NULL,
 step_order INT NOT NULL,
@@ -34,7 +34,7 @@ FOREIGN KEY (project_id) REFERENCES project(project_id)
 );
 
 CREATE TABLE category (
-category_id INT NOT NULL,
+category_id INT NOT NULL AUTO_INCREMENT,
 category_name VARCHAR(128) NOT NULL,
 PRIMARY KEY (category_id)
 );

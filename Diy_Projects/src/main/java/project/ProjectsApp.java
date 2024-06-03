@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import project.exception.DbException;
+import project.service.ProjectService;
 
 
 
@@ -15,11 +16,11 @@ import project.exception.DbException;
 
 public class ProjectsApp {
 	private static Scanner scan = new Scanner(System.in);
+	private ProjectService ps = new ProjectService();
 	// @formatter:off
 	private List<String> operations = List.of(
 			"1) Create and Populate the Tables",
-			"2) Add Project",
-			"-1) Exit"
+			"2) Add Project"
 			
 	);
 	// @formatter:on
@@ -35,13 +36,43 @@ public class ProjectsApp {
 		boolean done = false;
 		
 		while(!done) {
+			try {
 			int op = getOperation();
 			switch (op) {
 			case 1:
-				
+				createTables();
+				break;
+			case 2:
+				System.out.println("\nhaha nothing here yet.");
+				break;
+			case -1:
+				done = quitMenu();
+				break;
+			default:
+				System.out.println("\n" + op + " is invalid. Try again.");
+				break;
+			}
+			}catch (Exception e) {
+				System.out.println("\nError: "+ e.toString() + " try again.");
 			}
 		}
 	}
+
+private void createTables() {
+		try {
+		new ProjectService().createAndPopulateTables();
+		} catch (Exception e) {
+			System.out.println("\nError: " + e.toString() + " try again.");
+		}
+		
+	}
+
+
+private boolean quitMenu() {
+		System.out.println("See ya!");
+		return true;
+	}
+
 
 /**
  *  
@@ -49,29 +80,31 @@ public class ProjectsApp {
  */
 	private int getOperation() {
 		printOperations();
-		int op = getIntInput("enter the operation number(just enter to exit)");
+		Integer op = getIntInput("enter the operation number(just enter to exit)");
 		return Objects.isNull(op) ? -1 : op;
 		
 	}
 
 
-private Integer getIntInput(String string) {
-	String input = getStringInput();
+private Integer getIntInput(String prompt) {
+	String input = getStringInput(prompt);
 	if (Objects.isNull(input)) {
 		return null;
 	}
 	try {
 		return Integer.parseInt(input);
 	}catch (NumberFormatException e) {
-		throw new DbException(input + "is not a valid number.");
+		throw new DbException(input + " is not a valid number.");
 	}
 	
 }
 
 
-private String getStringInput() {
-	// TODO Auto-generated method stub
-	return null;
+private String getStringInput(String prompt) {
+	System.out.print(prompt + ":");
+	String line = scan.nextLine();
+	
+	return line.isBlank() ? null : line.trim();
 }
 
 

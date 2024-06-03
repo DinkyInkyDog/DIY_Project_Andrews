@@ -25,6 +25,7 @@ private static final String DATA_FILE = "project_data.sql";
 	public void createAndPopulateTables() {
 		loadFile(SCHEMA_FILE);
 		//loadFile(DATA_FILE);
+		
 	}
 	
 	
@@ -124,10 +125,6 @@ private static final String DATA_FILE = "project_data.sql";
 
 	
 
-	public static void addProject() {
-		Scanner scan = new Scanner(System.in);
-		
-	}
 	
 	
 }
