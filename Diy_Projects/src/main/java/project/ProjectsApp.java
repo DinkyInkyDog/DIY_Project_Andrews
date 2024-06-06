@@ -43,7 +43,7 @@ public class ProjectsApp {
 				createTables();
 				break;
 			case 2:
-				System.out.println("\nhaha nothing here yet.");
+				createProject();
 				break;
 			case -1:
 				done = quitMenu();
@@ -57,6 +57,16 @@ public class ProjectsApp {
 			}
 		}
 	}
+
+private void createProject() {
+	try {
+		new ProjectService().addProject();
+		
+	} catch(Exception e) {
+		System.out.println("\nError: " + e.toString() + "try again.");
+	}
+}
+
 
 private void createTables() {
 		try {
