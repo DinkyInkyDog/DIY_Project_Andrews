@@ -132,20 +132,33 @@ private Scanner scan = new Scanner(System.in);
 	public void addProject() {
 		Project project = new Project();
 		System.out.println("Enter the Project data");
-		
-		String projectName = getStringInput("Project name= ");
-		
+		String projectName = null;
+		while (projectName == null) {
+			projectName = getStringInput("Project name= ");
+			if (projectName == null) {
+				System.out.println("Must name your Project.");
+			}
+		}
 		BigDecimal estimatedHours = getBDInput("Estimated hours to complete the project= ");
 		BigDecimal actualHours = getBDInput("Actual hours to complete the project= ");
-		Integer difficulty = getIntInput("On a scale of 1 to 10, how difficult is this project. (1 being easiest, 10 being hardest");
+		
+		Integer difficulty = getIntInput("On a scale of 1 to 10, how difficult is this project? (1 being easiest, 10 being hardest)/n");
+		String notes = getStringInput("Any project notes? Type enter when you're finished.");
+		
+		project.setActualHours(actualHours);
+		project.setDifficulty(difficulty);
+		project.setProjectName(projectName);
+		project.setNotes(notes);
+		project.setEstimatedHours(estimatedHours);
+		
 		
 	}
 
 
 private Integer getIntInput(String prompt) {
-	System.out.println(prompt);
-	String input = scan.nextLine();
+	String input = getStringInput(prompt);
 	if (Objects.isNull(input)) {
+		System.out.println("is Null.");
 		return null;
 	}
 	try {
@@ -155,14 +168,23 @@ private Integer getIntInput(String prompt) {
 	}
 }
 
-
+	
 
 private BigDecimal getBDInput(String prompt) {
 	
 	String decimal = getStringInput(prompt);
 	
-	BigDecimal input = new BigDecimal(decimal);
-	return input;
+		if (Objects.isNull(decimal)) {
+				System.out.println("is Null.");
+				return null;
+			}
+			try {
+				int input = Integer.parseInt(decimal);
+				return new BigDecimal(input);
+			}catch (NumberFormatException e) {
+				throw new DbException(decimal + " is not a valid number.");
+			}
+	
 	
 }
 
@@ -172,7 +194,7 @@ private BigDecimal getBDInput(String prompt) {
  * @param prompt the print for the user to know what they need to input.
  */
 private String getStringInput(String prompt) {
-	System.out.println(prompt);
+	System.out.print(prompt);
 	String input = scan.nextLine();
 	return input.isBlank() ? null : input.trim();
 }
