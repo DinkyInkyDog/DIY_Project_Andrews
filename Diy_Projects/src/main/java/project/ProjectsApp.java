@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import project.exception.DbException;
 import project.service.ProjectService;
+import projects.entity.Project;
 
 
 
@@ -40,7 +41,7 @@ public class ProjectsApp {
 			int op = getOperation();
 			switch (op) {
 			case 1:
-				createTables();
+				uploadTables();
 				break;
 			case 2:
 				createProject();
@@ -60,15 +61,14 @@ public class ProjectsApp {
 
 private void createProject() {
 	try {
-		new ProjectService().addProject();
-		
-	} catch(Exception e) {
-		System.out.println("\nError: " + e.toString() + "try again.");
+	new ProjectService().addProject();
+	} catch (Exception e) {
+		System.out.println("\nError: " + e.toString() + "try again");
 	}
 }
 
 
-private void createTables() {
+private void uploadTables() {
 		try {
 		new ProjectService().createAndPopulateTables();
 		} catch (Exception e) {

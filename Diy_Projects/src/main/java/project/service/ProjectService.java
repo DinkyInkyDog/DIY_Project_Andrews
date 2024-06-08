@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import project.dao.ProjectDao;
 import project.exception.DbException;
+import projects.entity.Project;
 
 @SuppressWarnings("unused")
 public class ProjectService{
@@ -120,6 +121,15 @@ private static final String DATA_FILE = "project_data.sql";
 	}
 	
 }
+
+
+
+	public void addProject() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 

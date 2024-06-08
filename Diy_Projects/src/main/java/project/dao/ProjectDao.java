@@ -9,7 +9,10 @@ import project.exception.DbException;
 import provided.util.DaoBase;
 
 public class ProjectDao extends DaoBase {
-	private static final String PROJECT_TABLE = "project"; 
+	private static final String PROJECT_TABLE = "project";
+	private static final String MATERIAL_TABLE = "material";
+	private static final String CATEGORY_TABLE = "category";
+	private static final String STEP_TABLE = "step";
 	/**
 	 * 
 	 * @param sqlStatements
