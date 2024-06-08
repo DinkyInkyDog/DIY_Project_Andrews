@@ -40,7 +40,7 @@ public class ProjectDao extends DaoBase {
 		
 	}
 	public Project insertProject(Project project) {
-		String sql = " " + "INSERT INTO" + PROJECT_TABLE + " " + 
+		String sql = " " + "INSERT INTO " + PROJECT_TABLE + " " + 
 	"(project_name, estimated_hours, actual_hours, difficulty, notes)"
 				+ "VALUES " + "(?, ?, ?, ?, ?)";
 		try (Connection conn = Dbconnection.getConnections()) {

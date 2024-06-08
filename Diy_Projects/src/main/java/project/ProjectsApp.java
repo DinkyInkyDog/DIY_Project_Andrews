@@ -65,7 +65,7 @@ private void createProject() {
 	addProject();
 	System.out.println("Project created successfully!");
 	} catch (Exception e) {
-		System.out.println("\nError: " + e.toString() + "try again");
+		System.out.println("\nError: " + e.toString() + " try again");
 	}
 }
 
