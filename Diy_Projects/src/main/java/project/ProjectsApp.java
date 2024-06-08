@@ -113,7 +113,7 @@ private Integer getIntInput(String prompt) {
 
 
 private String getStringInput(String prompt) {
-	System.out.print(prompt + ":");
+	System.out.print(prompt);
 	String line = scan.nextLine();
 	
 	return line.isBlank() ? null : line.trim();
@@ -140,8 +140,8 @@ public void addProject() {
 	BigDecimal estimatedHours = getBDInput("Estimated hours to complete the project= ");
 	BigDecimal actualHours = getBDInput("Actual hours to complete the project= ");
 	
-	Integer difficulty = getIntInput("On a scale of 1 to 10, how difficult is this project? (1 being easiest, 10 being hardest)/n");
-	String notes = getStringInput("Any project notes? Type enter when you're finished.");
+	Integer difficulty = getIntInput("On a scale of 1 to 10, how difficult is this project? (1 being easiest, 10 being hardest) ");
+	String notes = getStringInput("Any project notes? Type enter when you're finished. \n");
 	
 	project.setActualHours(actualHours);
 	project.setDifficulty(difficulty);
