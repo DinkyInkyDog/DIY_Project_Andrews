@@ -12,7 +12,7 @@ private static ProjectService ps = new ProjectService();
 		
 		//ps.addProject();
 		
-		ps.getIntInputTest("testing");
+		
 	}
 
 }
