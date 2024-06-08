@@ -16,7 +16,7 @@ import projects.entity.Project;
 
 
 public class ProjectsApp {
-	private static Scanner scan = new Scanner(System.in);
+	private Scanner scan = new Scanner(System.in);
 	private ProjectService ps = new ProjectService();
 	// @formatter:off
 	private List<String> operations = List.of(
@@ -61,7 +61,8 @@ public class ProjectsApp {
 
 private void createProject() {
 	try {
-	new ProjectService().addProject();
+	ps.addProject();
+	System.out.println("Project created successfully!");
 	} catch (Exception e) {
 		System.out.println("\nError: " + e.toString() + "try again");
 	}
@@ -70,7 +71,7 @@ private void createProject() {
 
 private void uploadTables() {
 		try {
-		new ProjectService().createAndPopulateTables();
+		ps.createAndPopulateTables();
 		} catch (Exception e) {
 			System.out.println("\nError: " + e.toString() + " try again.");
 		}

@@ -6,7 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
 import project.dao.ProjectDao;
 import project.exception.DbException;
@@ -14,11 +16,12 @@ import projects.entity.Project;
 
 @SuppressWarnings("unused")
 public class ProjectService{
+	
 
 private static final String SCHEMA_FILE = "project_schema.sql";
 private static final String DATA_FILE = "project_data.sql";
-	
-
+private ProjectDao dao = new ProjectDao();
+private Scanner scan = new Scanner(System.in);
 /**
  * loads the two pre-made files that contain the sql code to create tables and then
  * fill them with data.
@@ -123,11 +126,56 @@ private static final String DATA_FILE = "project_data.sql";
 }
 
 
-
+/**
+ * 
+ */
 	public void addProject() {
-		// TODO Auto-generated method stub
+		Project project = new Project();
+		System.out.println("Enter the Project data");
+		
+		String projectName = getStringInput("Project name= ");
+		
+		BigDecimal estimatedHours = getBDInput("Estimated hours to complete the project= ");
+		BigDecimal actualHours = getBDInput("Actual hours to complete the project= ");
+		Integer difficulty = getIntInput("On a scale of 1 to 10, how difficult is this project. (1 being easiest, 10 being hardest");
 		
 	}
+
+
+private Integer getIntInput(String prompt) {
+	System.out.println(prompt);
+	String input = scan.nextLine();
+	if (Objects.isNull(input)) {
+		return null;
+	}
+	try {
+		return Integer.parseInt(input);
+	}catch (NumberFormatException e) {
+		throw new DbException(input + " is not a valid number.");
+	}
+}
+
+
+
+private BigDecimal getBDInput(String prompt) {
+	
+	String decimal = getStringInput(prompt);
+	
+	BigDecimal input = new BigDecimal(decimal);
+	return input;
+	
+}
+
+
+
+/**
+ * @param prompt the print for the user to know what they need to input.
+ */
+private String getStringInput(String prompt) {
+	System.out.println(prompt);
+	String input = scan.nextLine();
+	return input.isBlank() ? null : input.trim();
+}
 
 
 
