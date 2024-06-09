@@ -22,7 +22,9 @@ public class ProjectsApp {
 	// @formatter:off
 	private List<String> operations = List.of(
 			"1) Create and Populate the Tables",
-			"2) Add Project"
+			"2) Add Project",
+			"3) Select Project from Id",
+			"4) List All Projects"
 			
 	);
 	// @formatter:on
@@ -47,6 +49,12 @@ public class ProjectsApp {
 			case 2:
 				createProject();
 				break;
+			case 3:
+				selectProjectFromId();
+				break;
+			case 4:
+				listProjects();
+				break;
 			case -1:
 				done = quitMenu();
 				break;
@@ -59,6 +67,24 @@ public class ProjectsApp {
 			}
 		}
 	}
+
+private void selectProjectFromId() {
+		try {
+			selectProject();
+		} catch (Exception e) {
+			System.out.println("/nError: " + e.toString() + " Try again.");
+		}
+		
+	}
+
+
+private void selectProject() {
+	Integer projectId = getIntInput("Enter the Project's Id: ");
+	Project project = new Project();
+	project.setProjectId(projectId)
+	
+}
+
 
 private void createProject() {
 	try {
