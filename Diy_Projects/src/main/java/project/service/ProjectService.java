@@ -32,7 +32,7 @@ private Scanner scan = new Scanner(System.in);
 		
 	}
 	
-	
+
 
 /**
  * 	
@@ -133,9 +133,24 @@ private Scanner scan = new Scanner(System.in);
 	}
 
 
-/**
- * 
- */
+
+	
+	public Project getProjectFromId(Project project) {
+		List<Project> output = dao.listProjects(true, project);
+		for (Project pr : output) {
+			project = pr;
+		}
+		return project;
+	}
+
+
+
+	public List<Project> selectAllProjects() {
+		return dao.listProjects(false, null);
+		
+	}
+
+
 	
 
 

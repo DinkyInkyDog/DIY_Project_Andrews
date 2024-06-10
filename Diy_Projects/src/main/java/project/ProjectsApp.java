@@ -23,7 +23,7 @@ public class ProjectsApp {
 	private List<String> operations = List.of(
 			"1) Create and Populate the Tables",
 			"2) Add Project",
-			"3) Select Project from Id",
+			"3) View Project from Id",
 			"4) List All Projects"
 			
 	);
@@ -50,7 +50,7 @@ public class ProjectsApp {
 				createProject();
 				break;
 			case 3:
-				selectProjectFromId();
+				viewProjectFromId();
 				break;
 			case 4:
 				listProjects();
@@ -68,7 +68,26 @@ public class ProjectsApp {
 		}
 	}
 
-private void selectProjectFromId() {
+private void listProjects() {
+		try {
+			selectAllProjects();
+		} catch (Exception e) {
+			System.out.println("/nError: " + e.toString() + " Try again.");
+		}
+		
+	}
+
+
+private void selectAllProjects() {
+	List<Project> output = ps.selectAllProjects();
+	
+	for (Project project : output) {
+		System.out.println(project.toString());
+	}
+}
+
+
+private void viewProjectFromId() {
 		try {
 			selectProject();
 		} catch (Exception e) {
@@ -78,11 +97,14 @@ private void selectProjectFromId() {
 	}
 
 
-private void selectProject() {
+public void selectProject() {
 	Integer projectId = getIntInput("Enter the Project's Id: ");
 	Project project = new Project();
-	project.setProjectId(projectId)
+	project.setProjectId(projectId);
+	Project output = ps.getProjectFromId(project);
 	
+	System.out.println();
+	System.out.println(output.toString());
 }
 
 
