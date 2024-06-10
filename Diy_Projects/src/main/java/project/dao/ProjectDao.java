@@ -74,18 +74,20 @@ public class ProjectDao extends DaoBase {
 	 * @param search  
 	 * @return
 	 */
-	public List<Project> listProjects(boolean specificProject, Project project) {
+	public List<Project> listProjects(boolean specificProject, int project) {
 		List<Project> list = new LinkedList<>();
 		String sql =  ""+"SELECT * FROM " + PROJECT_TABLE;
 		if (specificProject == true) {
-			int projectId = project.getProjectId();
-			sql += " WHERE project_id =" + projectId + ";";
+				sql += " WHERE project_id = ?;";
 		} else {
 			sql += ";";
 		}
 		try (Connection conn = Dbconnection.getConnections()){
 			startTransaction(conn);
 			try (PreparedStatement ps = conn.prepareStatement(sql)) {
+				if (specificProject == true) {
+					setParameter(ps, 1, project, Ingteger.class);
+				}
 				try(ResultSet rs = ps.executeQuery()){
 					while(rs.next()) {
 						list.add(extract(rs, Project.class));

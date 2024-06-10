@@ -136,7 +136,8 @@ private Scanner scan = new Scanner(System.in);
 
 	
 	public Project getProjectFromId(Project project) {
-		List<Project> output = dao.listProjects(true, project);
+		int projectId = project.getProjectId();
+		List<Project> output = dao.listProjects(true, projectId);
 		for (Project pr : output) {
 			project = pr;
 		}
@@ -146,7 +147,7 @@ private Scanner scan = new Scanner(System.in);
 
 
 	public List<Project> selectAllProjects() {
-		return dao.listProjects(false, null);
+		return dao.listProjects(false, 0);
 		
 	}
 
