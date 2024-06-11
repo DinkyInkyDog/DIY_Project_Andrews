@@ -138,10 +138,14 @@ private Scanner scan = new Scanner(System.in);
 	public Project getProjectFromId(Project project) {
 		int projectId = project.getProjectId();
 		List<Project> output = dao.listProjects(true, projectId);
+		if (output.isEmpty()) {
+			throw new DbException("The Id is invalid");
+		}else {
 		for (Project pr : output) {
 			project = pr;
 		}
 		return project;
+		}
 	}
 
 

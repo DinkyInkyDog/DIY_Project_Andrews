@@ -86,7 +86,7 @@ public class ProjectDao extends DaoBase {
 			startTransaction(conn);
 			try (PreparedStatement ps = conn.prepareStatement(sql)) {
 				if (specificProject == true) {
-					setParameter(ps, 1, project, Ingteger.class);
+					setParameter(ps, 1, project, Integer.class);
 				}
 				try(ResultSet rs = ps.executeQuery()){
 					while(rs.next()) {
