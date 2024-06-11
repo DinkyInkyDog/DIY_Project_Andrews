@@ -109,11 +109,26 @@ public class ProjectDao extends DaoBase {
 				+ " (project_id, material_name, num_required, cost)"
 				+ "VALUE (?, ?, ?, ?);"; 
 		try (Connection conn = Dbconnection.getConnections()){
+			startTransaction(conn);
+			try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+				setParameter(stmt, 1, material.getMaterialId(), Integer.class);
+				setParameter(stmt, 2, material.getMaterialName(), String.class);
+				setParameter(stmt, 3, material.getNumRequired(), Integer.class);
+				setParameter(stmt, 4, material.getCost(), BigDecimal.class);
+				stmt.executeUpdate();
+				
+				Integer materialId = getLastInsertId(conn, MATERIAL_TABLE);
+				material.setMaterialId(materialId);
+				return material;
+			}catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
 			
 		}catch (SQLException e) {
 			throw new DbException(e);
 		}
-		return null;
+	
 	}
 	 
 }

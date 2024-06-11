@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import project.exception.DbException;
 import project.service.ProjectService;
+import projects.entity.Material;
 import projects.entity.Project;
 
 
@@ -72,6 +73,29 @@ public class ProjectsApp {
 			}
 		}
 	}
+
+private void createMaterial() {
+		try {
+			if(!Objects.nonNull(curProject)) {
+				System.out.println("No project currently selected.");
+				return;
+			} 
+			Material material = new Material();
+			material.setProjectId(curProject);
+			String materialName = getStringInput("Material name: ");
+			Integer numRequired = getIntInput("number reqired: ");
+			BigDecimal cost = getBDInput("Material overall cost: ");
+			
+			material.setMaterialName(materialName);
+			material.setNumRequired(numRequired);
+			material.setCost(cost);
+			ps.addMaterial(material);
+		}catch (Exception e) {
+			System.out.println("/nError: " +e.toString() + " Try again.");
+		}
+		
+	}
+
 
 private void listProjects() {
 		try {

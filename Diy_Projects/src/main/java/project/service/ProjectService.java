@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 
 import project.dao.ProjectDao;
 import project.exception.DbException;
+import projects.entity.Material;
 import projects.entity.Project;
 
 @SuppressWarnings("unused")
@@ -152,6 +153,13 @@ private Scanner scan = new Scanner(System.in);
 
 	public List<Project> selectAllProjects() {
 		return dao.listProjects(false, 0);
+		
+	}
+
+
+
+	public void addMaterial(Material material) {
+		Material output = dao.insertMaterial(material);
 		
 	}
 
