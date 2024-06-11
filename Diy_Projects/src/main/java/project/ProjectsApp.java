@@ -19,12 +19,14 @@ import projects.entity.Project;
 public class ProjectsApp {
 	private Scanner scan = new Scanner(System.in);
 	private ProjectService ps = new ProjectService();
+	private int curProject; 
 	// @formatter:off
 	private List<String> operations = List.of(
 			"1) Create and Populate the Tables",
 			"2) Add Project",
-			"3) View Project from Id",
-			"4) List All Projects"
+			"3) Select Project from Id",
+			"4) List All Projects",
+			"5) Add material to selected Project"
 			
 	);
 	// @formatter:on
@@ -54,6 +56,9 @@ public class ProjectsApp {
 				break;
 			case 4:
 				listProjects();
+				break;
+			case 5:
+				createMaterial();
 				break;
 			case -1:
 				done = quitMenu();
@@ -102,7 +107,7 @@ public void selectProject() {
 	Project project = new Project();
 	project.setProjectId(projectId);
 	Project output = ps.getProjectFromId(project);
-	
+	curProject = output.getProjectId();
 	System.out.println();
 	System.out.println(output.toString());
 }

@@ -13,9 +13,7 @@ private static ProjectDao dao = new ProjectDao();
 	public static void main(String[] args) {
 		
 		//ps.addProject();
-		Project project = new Project();
-		project.setProjectId(1);
-		dao.listProjects(true, project);
+		
 		
 	}
 

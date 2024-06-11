@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import project.exception.DbException;
+import projects.entity.Material;
 import projects.entity.Project;
 import provided.util.DaoBase;
 
@@ -102,6 +103,17 @@ public class ProjectDao extends DaoBase {
 			throw new DbException(e);
 		}
 		
+	}
+	public Material insertMaterial(Material material) {
+		String sql = " " + "INSERT INTO " + MATERIAL_TABLE 
+				+ " (project_id, material_name, num_required, cost)"
+				+ "VALUE (?, ?, ?, ?);"; 
+		try (Connection conn = Dbconnection.getConnections()){
+			
+		}catch (SQLException e) {
+			throw new DbException(e);
+		}
+		return null;
 	}
 	 
 }
