@@ -142,10 +142,12 @@ private Scanner scan = new Scanner(System.in);
 		if (output.isEmpty()) {
 			throw new DbException("The Id is invalid");
 		}else {
-		for (Project pr : output) {
+			
+			for (Project pr : output) {
 			project = pr;
-		}
-		return project;
+			}
+		
+			return project;
 		}
 	}
 

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import project.exception.DbException;
 import projects.entity.Material;
@@ -111,11 +112,13 @@ public class ProjectDao extends DaoBase {
 		try (Connection conn = Dbconnection.getConnections()){
 			startTransaction(conn);
 			try(PreparedStatement stmt = conn.prepareStatement(sql)) {
-				setParameter(stmt, 1, material.getMaterialId(), Integer.class);
+				setParameter(stmt, 1, material.getProjectId(), Integer.class);
 				setParameter(stmt, 2, material.getMaterialName(), String.class);
 				setParameter(stmt, 3, material.getNumRequired(), Integer.class);
 				setParameter(stmt, 4, material.getCost(), BigDecimal.class);
+				
 				stmt.executeUpdate();
+				commitTransaction(conn);
 				
 				Integer materialId = getLastInsertId(conn, MATERIAL_TABLE);
 				material.setMaterialId(materialId);
@@ -129,6 +132,11 @@ public class ProjectDao extends DaoBase {
 			throw new DbException(e);
 		}
 	
+	}
+	public Optional<Material> listProjectMaterials(Project project) {
+		List<Material> output = new LinkedList<>();
+		
+		return Optional.;
 	}
 	 
 }
