@@ -27,7 +27,10 @@ public class ProjectsApp {
 			"2) Add Project",
 			"3) Select Project from Id",
 			"4) List All Projects",
-			"5) Add material to selected Project"
+			"5) Add material to selected Project",
+			"6) Add step to selected Project",
+			"7) Add category to selected Project"
+			
 			
 	);
 	// @formatter:on
@@ -60,6 +63,12 @@ public class ProjectsApp {
 				break;
 			case 5:
 				createMaterial();
+				break;
+			case 6:
+				createStep();
+				break;
+			case 7:
+				addCategoryToProject();
 				break;
 			case -1:
 				done = quitMenu();
