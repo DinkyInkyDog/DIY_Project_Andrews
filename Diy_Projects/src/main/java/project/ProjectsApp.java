@@ -1,6 +1,7 @@
 package project;
 
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -82,7 +83,11 @@ public class ProjectsApp {
 
 
 
-
+/**
+ * This method allows the user to pick a field they wish to update in the selected project and put in the information
+ * the change it to. You can do multiple fields in one update. if no changes are selected it goes back to 
+ * the main selection menu
+ */
 private void modifyProject() {
 		try {
 			System.out.println("What would you like to change about the Project?");
@@ -106,14 +111,46 @@ private void modifyProject() {
 					String newName = getStringInput("New Project Name: ");
 					upProject.setProjectName(newName);
 					changeMore = quitChanges();
+					break;
 				case 2:
 					BigDecimal newEstimatedHours = getBDInput("New Estimated Hours: ");
+					upProject.setEstimatedHours(newEstimatedHours);
+					changeMore = quitChanges();
+					break;
 				case 3:
 					BigDecimal newActualHours = getBDInput("New Actual Hours: ");
+					upProject.setActualHours(newActualHours);
+					changeMore = quitChanges();
+					break;
 				case 4:
 					Integer newDifficulty = getIntInput("New Difficulty: ");
+					upProject.setDifficulty(newDifficulty);
+					changeMore = quitChanges();
+					break;
 				case 5:
 					String newNote = getStringInput("New Note: ");
+					upProject.setNotes(newNote);
+					changeMore = quitChanges();
+					break;
+				case -1:
+					boolean changesMade = false;
+					
+					for(Field field : upProject.getClass().getDeclaredFields()) {
+						field.setAccessible(true);
+						if( field != null) {
+							changesMade = true;
+						}
+					}
+					if (changesMade != true) {
+						System.out.println("no changes entered. Returning to main menu.");
+						displayMenu();
+					} else {
+						ps.modifyProjectFields(upProject);
+					}
+					
+				default:
+					System.out.println("\n" + userChoice + " is invalid. Try again.");
+					break;
 				}
 			}
 			            
