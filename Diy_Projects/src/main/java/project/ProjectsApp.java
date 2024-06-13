@@ -27,9 +27,10 @@ public class ProjectsApp {
 			"2) Add Project",
 			"3) Select Project from Id",
 			"4) List All Projects",
-			"5) Add material to selected Project",
-			"6) Add step to selected Project",
-			"7) Add category to selected Project"
+			"5) Add Material to selected Project",
+			"6) Modify selected Project",
+			"7) Delete selected Project"
+			
 			
 			
 	);
@@ -65,11 +66,7 @@ public class ProjectsApp {
 				createMaterial();
 				break;
 			case 6:
-				createStep();
-				break;
-			case 7:
-				addCategoryToProject();
-				break;
+				modifyProject();
 			case -1:
 				done = quitMenu();
 				break;
@@ -83,10 +80,37 @@ public class ProjectsApp {
 		}
 	}
 
+
+
+
+private void modifyProject() {
+		try {
+			System.out.println("What would you like to change about the Project?");
+			List<String> columns = List.of(
+					"1) Project name",
+					"2) Estimated hours",
+					"3) Actual hours",
+					"4) Difficulty",
+					"5) Notes"
+			);
+			for (String option : columns) {
+				System.out.println(option);
+			}
+			Integer userChoice = getIntInput("\nSelect the number of the operation to change (enter to go back to the main menu)");	
+			
+			
+			            
+		} catch (Exception e) {
+			System.out.println("\nError: " + e.toString() + " Try again.");
+		}
+		
+	}
+
+
 private void createMaterial() {
 		try {
 			if(!Objects.nonNull(curProject)) {
-				System.out.println("No project currently selected.");
+				System.out.println("No project currently selected."); 
 				return;
 			} 
 			Material material = new Material();
@@ -100,7 +124,7 @@ private void createMaterial() {
 			material.setCost(cost);
 			ps.addMaterial(material);
 		}catch (Exception e) {
-			System.out.println("/nError: " +e.toString() + " Try again.");
+			System.out.println("\nError: " +e.toString() + " Try again.");
 		}
 		
 	}
@@ -110,7 +134,7 @@ private void listProjects() {
 		try {
 			selectAllProjects();
 		} catch (Exception e) {
-			System.out.println("/nError: " + e.toString() + " Try again.");
+			System.out.println("\nError: " + e.toString() + " Try again.");
 		}
 		
 	}
@@ -129,7 +153,7 @@ private void viewProjectFromId() {
 		try {
 			selectProject();
 		} catch (Exception e) {
-			System.out.println("/nError: " + e.toString() + " Try again.");
+			System.out.println("\nError: " + e.toString() + " Try again.");
 		}
 		
 	}
@@ -174,7 +198,7 @@ private boolean quitMenu() {
 
 /**
  *  
- * @return
+ * @return the user's number they chose as the operation number
  */
 	private int getOperation() {
 		printOperations();

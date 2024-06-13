@@ -75,6 +75,8 @@ public class ProjectDao extends DaoBase {
 	 * 
 	 * @param search  
 	 * @return
+	 * 
+	 * I need to change it so it shows all the other stuff too.
 	 */
 	public List<Project> listProjects(boolean specificProject, int project) {
 		List<Project> list = new LinkedList<>();

@@ -142,7 +142,7 @@ private Scanner scan = new Scanner(System.in);
 		if (output.isEmpty()) {
 			throw new DbException("The Id is invalid");
 		}else {
-			List<Material> materials = dao.listProjectMaterials(project);
+			
 			for (Project pr : output) {
 			project = pr;
 			}
