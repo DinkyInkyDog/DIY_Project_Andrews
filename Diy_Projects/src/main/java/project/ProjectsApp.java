@@ -96,9 +96,26 @@ private void modifyProject() {
 			for (String option : columns) {
 				System.out.println(option);
 			}
-			Integer userChoice = getIntInput("\nSelect the number of the operation to change (enter to go back to the main menu)");	
-			
-			
+			boolean changeMore = true;
+			Project upProject = new Project();
+			while (changeMore == true) {
+				Integer userChoice = getIntInput("\nSelect the number of the operation to change (enter to go back to the main menu)");	
+				
+				switch (userChoice) {
+				case 1:
+					String newName = getStringInput("New Project Name: ");
+					upProject.setProjectName(newName);
+					changeMore = quitChanges();
+				case 2:
+					BigDecimal newEstimatedHours = getBDInput("New Estimated Hours: ");
+				case 3:
+					BigDecimal newActualHours = getBDInput("New Actual Hours: ");
+				case 4:
+					Integer newDifficulty = getIntInput("New Difficulty: ");
+				case 5:
+					String newNote = getStringInput("New Note: ");
+				}
+			}
 			            
 		} catch (Exception e) {
 			System.out.println("\nError: " + e.toString() + " Try again.");
@@ -195,7 +212,17 @@ private boolean quitMenu() {
 		return true;
 	}
 
-
+private boolean quitChanges() {
+	Integer input = getIntInput("Update more columns? 1 = update more, enter = finish.");
+	
+	if (input == 1) {
+		System.out.println("All Changes Collected!");
+		return false;
+	} else {
+		return true;
+	}
+	
+}
 /**
  *  
  * @return the user's number they chose as the operation number

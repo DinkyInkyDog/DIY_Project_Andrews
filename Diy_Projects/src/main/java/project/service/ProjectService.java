@@ -1,6 +1,7 @@
 package project.service;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -162,6 +163,20 @@ private Scanner scan = new Scanner(System.in);
 
 	public void addMaterial(Material material) {
 		Material output = dao.insertMaterial(material);
+		
+	}
+
+
+
+	public void modifyProjectFields(Project project) {
+		for (Field field : project.getClass().getDeclaredFields()) {
+			field.setAccessible(true);
+			try {
+				
+			} catch(Exception e) {
+				throw new DbException(e);
+			}
+		}
 		
 	}
 
