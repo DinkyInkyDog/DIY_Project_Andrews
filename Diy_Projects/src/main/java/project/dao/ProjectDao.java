@@ -1,5 +1,6 @@
 package project.dao;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -135,10 +136,11 @@ public class ProjectDao extends DaoBase {
 		}
 	
 	}
-	public Optional<Material> listProjectMaterials(Project project) {
-		List<Material> output = new LinkedList<>();
+	
+	public int updateProjectField(Project project, Field field) {
 		
-		return Optional.;
+		String sql = "UPDATE " +PROJECT_TABLE + " SET " +
+		field.getName() + " = " + ;
 	}
 	 
 }

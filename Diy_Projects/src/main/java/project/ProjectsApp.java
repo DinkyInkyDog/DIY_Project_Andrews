@@ -3,6 +3,7 @@ package project;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -103,8 +104,9 @@ private void modifyProject() {
 			}
 			boolean changeMore = true;
 			Project upProject = new Project();
+			
 			while (changeMore == true) {
-				Integer userChoice = getIntInput("\nSelect the number of the operation to change (enter to go back to the main menu)");	
+				Integer userChoice = getIntInput("\nSelect the number of the operation to change (enter to Finish)");	
 				
 				switch (userChoice) {
 				case 1:
@@ -134,24 +136,27 @@ private void modifyProject() {
 					break;
 				case -1:
 					boolean changesMade = false;
-					
+					List<Field> fields = new LinkedList<>();
 					for(Field field : upProject.getClass().getDeclaredFields()) {
 						field.setAccessible(true);
 						if( field != null) {
 							changesMade = true;
+							
 						}
+						fields.add(field);
 					}
-					if (changesMade != true) {
-						System.out.println("no changes entered. Returning to main menu.");
-						displayMenu();
+					if (changesMade != false) {
+						ps.modifyProjectFields(fields);
 					} else {
-						ps.modifyProjectFields(upProject);
+						System.out.println("No changes were made. Returning to main menu");
+						displayMenu();
 					}
-					
+						
 				default:
 					System.out.println("\n" + userChoice + " is invalid. Try again.");
 					break;
 				}
+				
 			}
 			            
 		} catch (Exception e) {

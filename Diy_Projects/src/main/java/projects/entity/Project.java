@@ -12,10 +12,10 @@ import java.util.List;
  *
  */
 public class Project {
-  private Integer projectId;
-  private String projectName;
-  private BigDecimal estimatedHours;
-  private BigDecimal actualHours;
+  private Integer project_id;
+  private String project_name;
+  private BigDecimal estimated_hours;
+  private BigDecimal actual_hours;
   private Integer difficulty;
   private String notes;
 
@@ -24,35 +24,35 @@ public class Project {
   private List<Category> categories = new LinkedList<>();
 
   public Integer getProjectId() {
-    return projectId;
+    return project_id;
   }
 
   public void setProjectId(Integer projectId) {
-    this.projectId = projectId;
+    this.project_id = projectId;
   }
 
   public String getProjectName() {
-    return projectName;
+    return project_name;
   }
 
   public void setProjectName(String projectName) {
-    this.projectName = projectName;
+    this.project_name = projectName;
   }
 
   public BigDecimal getEstimatedHours() {
-    return estimatedHours;
+    return estimated_hours;
   }
 
   public void setEstimatedHours(BigDecimal estimatedHours) {
-    this.estimatedHours = estimatedHours;
+    this.estimated_hours = estimatedHours;
   }
 
   public BigDecimal getActualHours() {
-    return actualHours;
+    return actual_hours;
   }
 
   public void setActualHours(BigDecimal actualHours) {
-    this.actualHours = actualHours;
+    this.actual_hours = actualHours;
   }
 
   public Integer getDifficulty() {
@@ -87,10 +87,10 @@ public class Project {
   public String toString() {
     String result = "";
     
-    result += "\n   ID=" + projectId;
-    result += "\n   name=" + projectName;
-    result += "\n   estimatedHours=" + estimatedHours;
-    result += "\n   actualHours=" + actualHours;
+    result += "\n   ID=" + project_id;
+    result += "\n   name=" + project_name;
+    result += "\n   estimatedHours=" + estimated_hours;
+    result += "\n   actualHours=" + actual_hours;
     result += "\n   difficulty=" + difficulty;
     result += "\n   notes=" + notes;
     

@@ -161,21 +161,18 @@ private Scanner scan = new Scanner(System.in);
 
 
 
-	public void addMaterial(Material material) {
-		Material output = dao.insertMaterial(material);
-		
-	}
+	
 
 
 
-	public void modifyProjectFields(Project project) {
-		for (Field field : project.getClass().getDeclaredFields()) {
-			field.setAccessible(true);
-			try {
+	public void modifyProjectFields(List<Field> fields) {
+		int count = 0;
+		for (Field field : fields) {
+			if(field != null) {
+				String fieldName = field.getName();
 				
-			} catch(Exception e) {
-				throw new DbException(e);
 			}
+			count++;
 		}
 		
 	}
