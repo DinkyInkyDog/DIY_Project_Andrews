@@ -22,7 +22,7 @@ import projects.entity.Project;
 public class ProjectsApp {
 	private Scanner scan = new Scanner(System.in);
 	private ProjectService ps = new ProjectService();
-	private int curProject; 
+	private Integer curProject; 
 	// @formatter:off
 	private List<String> operations = List.of(
 			"1) Create and Populate the Tables",
@@ -69,6 +69,10 @@ public class ProjectsApp {
 				break;
 			case 6:
 				modifyProject();
+				break;
+			case 7:
+				deleteProject();
+				break;
 			case -1:
 				done = quitMenu();
 				break;
@@ -82,6 +86,25 @@ public class ProjectsApp {
 		}
 	}
 
+
+
+private void deleteProject() {
+		try {
+			System.out.println("Are you sure you want to delete the selected project?");
+			Integer cont = getIntInput("1 for continue, 0 or enter for back to Main menu");
+			if (cont != 0 || cont != null) {
+				ps.deleteProject(curProject);
+				curProject = null;
+			} else {
+				System.out.println("Okay phew. Returning to main menu.");
+				displayMenu();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("\nError: " + e.toString() + " Try again");
+		}
+		
+	}
 
 
 /**
@@ -110,7 +133,7 @@ private void modifyProject() {
 		String notes = getStringInput("New Notes: ");
 		cp.setNotes((notes != null) ? notes : cp.getNotes());
 		
-		boolean changes = ps.modifyProject(cp);
+		ps.modifyProject(cp);
 		
 	}catch (Exception e) {
 		System.out.println("\nError: " +e.toString()+ " Try again");
