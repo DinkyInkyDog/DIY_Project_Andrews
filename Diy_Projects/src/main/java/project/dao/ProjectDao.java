@@ -157,7 +157,9 @@ public class ProjectDao extends DaoBase {
 				setParameter(stmt, 4, cp.getDifficulty(), Integer.class);
 				setParameter(stmt, 5, cp.getNotes(), String.class);
 				setParameter(stmt, 6, cp.getProjectId(), Integer.class);
-				
+				int changes = stmt.executeUpdate();
+				commitTransaction(conn);
+				return changes;
 			}catch (Exception e) {
 				rollbackTransaction(conn);
 				throw new DbException(e);
@@ -167,7 +169,7 @@ public class ProjectDao extends DaoBase {
 			throw new DbException(e);
 		}
 		
-		return 0;
+		
 	}
 	 
 }
