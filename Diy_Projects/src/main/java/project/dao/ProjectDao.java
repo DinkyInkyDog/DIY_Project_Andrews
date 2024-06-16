@@ -137,10 +137,37 @@ public class ProjectDao extends DaoBase {
 	
 	}
 	
-	public int updateProjectField(Project project, Field field) {
+	
+	public int updateProject(Project cp) {
+		String sql = "UPDATE " + PROJECT_TABLE + " SET "
+				+ "project_name = ?,"
+				+ "estimated_hours = ?,"
+				+ "actual_hours = ?,"
+				+ "difficulty = ?,"
+				+ "notes = ? "
+				+ "WHERE project_id = ?;";
 		
-		String sql = "UPDATE " +PROJECT_TABLE + " SET " +
-		field.getName() + " = " + ;
+		try(Connection conn = Dbconnection.getConnections()) {
+			startTransaction(conn);
+			try(PreparedStatement stmt = conn.prepareStatement(sql)) {
+				
+				setParameter(stmt, 1, cp.getProjectName(), String.class);
+				setParameter(stmt, 2, cp.getEstimatedHours(), BigDecimal.class);
+				setParameter(stmt, 3, cp.getActualHours(), BigDecimal.class);
+				setParameter(stmt, 4, cp.getDifficulty(), Integer.class);
+				setParameter(stmt, 5, cp.getNotes(), String.class);
+				setParameter(stmt, 6, cp.getProjectId(), Integer.class);
+				
+			}catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+			
+		} catch(SQLException e) {
+			throw new DbException(e);
+		}
+		
+		return 0;
 	}
 	 
 }

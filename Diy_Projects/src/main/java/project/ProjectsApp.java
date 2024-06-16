@@ -85,86 +85,37 @@ public class ProjectsApp {
 
 
 /**
- * This method allows the user to pick a field they wish to update in the selected project and put in the information
- * the change it to. You can do multiple fields in one update. if no changes are selected it goes back to 
- * the main selection menu
+ * @param cp, the current project information in the database.
  */
 private void modifyProject() {
-		try {
-			System.out.println("What would you like to change about the Project?");
-			List<String> columns = List.of(
-					"1) Project name",
-					"2) Estimated hours",
-					"3) Actual hours",
-					"4) Difficulty",
-					"5) Notes"
-			);
-			for (String option : columns) {
-				System.out.println(option);
-			}
-			boolean changeMore = true;
-			Project upProject = new Project();
-			
-			while (changeMore == true) {
-				Integer userChoice = getIntInput("\nSelect the number of the operation to change (enter to Finish)");	
-				
-				switch (userChoice) {
-				case 1:
-					String newName = getStringInput("New Project Name: ");
-					upProject.setProjectName(newName);
-					changeMore = quitChanges();
-					break;
-				case 2:
-					BigDecimal newEstimatedHours = getBDInput("New Estimated Hours: ");
-					upProject.setEstimatedHours(newEstimatedHours);
-					changeMore = quitChanges();
-					break;
-				case 3:
-					BigDecimal newActualHours = getBDInput("New Actual Hours: ");
-					upProject.setActualHours(newActualHours);
-					changeMore = quitChanges();
-					break;
-				case 4:
-					Integer newDifficulty = getIntInput("New Difficulty: ");
-					upProject.setDifficulty(newDifficulty);
-					changeMore = quitChanges();
-					break;
-				case 5:
-					String newNote = getStringInput("New Note: ");
-					upProject.setNotes(newNote);
-					changeMore = quitChanges();
-					break;
-				case -1:
-					boolean changesMade = false;
-					List<Field> fields = new LinkedList<>();
-					for(Field field : upProject.getClass().getDeclaredFields()) {
-						field.setAccessible(true);
-						if( field != null) {
-							changesMade = true;
-							
-						}
-						fields.add(field);
-					}
-					if (changesMade != false) {
-						ps.modifyProjectFields(fields);
-					} else {
-						System.out.println("No changes were made. Returning to main menu");
-						displayMenu();
-					}
-						
-				default:
-					System.out.println("\n" + userChoice + " is invalid. Try again.");
-					break;
-				}
-				
-			}
-			            
-		} catch (Exception e) {
-			System.out.println("\nError: " + e.toString() + " Try again.");
-		}
+	try {
+		Project cp = new Project();
+		cp.setProjectId(curProject);
+		System.out.println("**Collecting selected Project data**");
+		cp = ps.getProjectFromId(cp);
+		System.out.println("Project data collected. Please input the new data. If you don't wish to change the field, just hit enter to skip.");
 		
+		String projectname = getStringInput("New Project name: ");
+		cp.setProjectName((projectname != null) ? projectname : cp.getProjectName());
+		
+		BigDecimal esthours = getBDInput("New Estimated hours: ");
+		cp.setEstimatedHours((esthours != null) ? esthours : cp.getEstimatedHours());
+		
+		BigDecimal acthours = getBDInput("New Actual hours: ");
+		cp.setActualHours((acthours != null) ? acthours : cp.getActualHours());
+		
+		Integer diff = getIntInput("New Difficulty: ");
+		cp.setDifficulty((diff != null) ? diff : cp.getDifficulty());
+		
+		String notes = getStringInput("New Notes: ");
+		cp.setNotes((notes != null) ? notes : cp.getNotes());
+		
+		boolean changes = ps.modifyProject(cp);
+		
+	}catch (Exception e) {
+		System.out.println("\nError: " +e.toString()+ " Try again");
 	}
-
+}
 
 private void createMaterial() {
 		try {
@@ -181,7 +132,7 @@ private void createMaterial() {
 			material.setMaterialName(materialName);
 			material.setNumRequired(numRequired);
 			material.setCost(cost);
-			ps.addMaterial(material);
+			//ps.addMaterial(material);
 		}catch (Exception e) {
 			System.out.println("\nError: " +e.toString() + " Try again.");
 		}

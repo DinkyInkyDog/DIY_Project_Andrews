@@ -178,6 +178,16 @@ private Scanner scan = new Scanner(System.in);
 	}
 
 
+
+	public boolean modifyProject(Project cp) {
+		int changes = dao.updateProject(cp);
+		if (changes == 0) {
+			throw new DbException("nothing changed in current project.");
+		}
+		return false;
+	}
+
+
 	
 
 
