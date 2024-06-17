@@ -89,12 +89,17 @@ public class ProjectsApp {
 
 
 private void deleteProject() {
-	if (curProject != null) {
+		Integer selectProject = getIntInput("Project Id of the one you want to delete: ");
+		Project project = new Project();
+		project.setProjectId(selectProject);
 		try {
+			project = ps.getProjectFromId(project);
+			System.out.println(project.toString());
 			System.out.println("Are you sure you want to delete the selected project?");
+			
 			Integer cont = getIntInput("1 for continue, 0 or enter for back to Main menu");
 			if (cont != 0 || cont != null) {
-				ps.deleteProject(curProject);
+				ps.deleteProject(selectProject);
 				curProject = null;
 			} else {
 				System.out.println("Okay phew. Returning to main menu.");
@@ -104,10 +109,7 @@ private void deleteProject() {
 		} catch (Exception e) {
 			System.out.println("\nError: " + e.toString() + " Try again");
 		}
-	} else {
-		System.out.println("Please select a project and try again.");
-		displayMenu();
-	}
+	
 	
 	}
 
