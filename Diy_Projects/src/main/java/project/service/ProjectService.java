@@ -165,24 +165,12 @@ private Scanner scan = new Scanner(System.in);
 
 
 
-	public void modifyProjectFields(List<Field> fields) {
-		int count = 0;
-		for (Field field : fields) {
-			if(field != null) {
-				String fieldName = field.getName();
-				
-			}
-			count++;
-		}
-		
-	}
-
 
 
 	public void modifyProject(Project cp) {
 		int changes = dao.updateProject(cp);
 		if (changes == 0) {
-			throw new DbException("nothing changed in current project.");
+			System.out.println("nothing changed in current project.");
 		}
 		
 	}
@@ -193,7 +181,7 @@ private Scanner scan = new Scanner(System.in);
 		Project project = new Project();
 		project.setProjectId(curProject);
 		
-		dao.deleteProject(project);
+		dao.deleteProject(curProject);
 	}
 
 

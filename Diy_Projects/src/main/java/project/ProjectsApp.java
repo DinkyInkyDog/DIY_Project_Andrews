@@ -89,6 +89,7 @@ public class ProjectsApp {
 
 
 private void deleteProject() {
+	if (curProject != null) {
 		try {
 			System.out.println("Are you sure you want to delete the selected project?");
 			Integer cont = getIntInput("1 for continue, 0 or enter for back to Main menu");
@@ -103,7 +104,11 @@ private void deleteProject() {
 		} catch (Exception e) {
 			System.out.println("\nError: " + e.toString() + " Try again");
 		}
-		
+	} else {
+		System.out.println("Please select a project and try again.");
+		displayMenu();
+	}
+	
 	}
 
 
@@ -111,32 +116,37 @@ private void deleteProject() {
  * @param cp, the current project information in the database.
  */
 private void modifyProject() {
+	if (curProject != null) {
 	try {
 		Project cp = new Project();
 		cp.setProjectId(curProject);
-		System.out.println("**Collecting selected Project data**");
+		System.out.println("\n**Collecting selected Project data**\n");
 		cp = ps.getProjectFromId(cp);
-		System.out.println("Project data collected. Please input the new data. If you don't wish to change the field, just hit enter to skip.");
+		System.out.println("\nProject data collected. Please input the new data. If you don't wish to change the field, just hit enter to skip.");
 		
 		String projectname = getStringInput("New Project name: ");
 		cp.setProjectName((projectname != null) ? projectname : cp.getProjectName());
 		
 		BigDecimal esthours = getBDInput("New Estimated hours: ");
 		cp.setEstimatedHours((esthours != null) ? esthours : cp.getEstimatedHours());
-		
+		System.out.println(cp.getEstimatedHours());
 		BigDecimal acthours = getBDInput("New Actual hours: ");
 		cp.setActualHours((acthours != null) ? acthours : cp.getActualHours());
-		
+		System.out.println(cp.getActualHours());
 		Integer diff = getIntInput("New Difficulty: ");
 		cp.setDifficulty((diff != null) ? diff : cp.getDifficulty());
-		
+		System.out.println(cp.getDifficulty());
 		String notes = getStringInput("New Notes: ");
 		cp.setNotes((notes != null) ? notes : cp.getNotes());
-		
+		System.out.println(cp.getNotes());
 		ps.modifyProject(cp);
 		
 	}catch (Exception e) {
 		System.out.println("\nError: " +e.toString()+ " Try again");
+		}
+	} else {
+		System.out.println("Please select a project and try again.");
+		displayMenu();
 	}
 }
 
