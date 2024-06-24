@@ -167,7 +167,7 @@ private void createMaterial() {
 			material.setMaterialName(materialName);
 			material.setNumRequired(numRequired);
 			material.setCost(cost);
-			//ps.addMaterial(material);
+			ps.addMaterial(material);
 		}catch (Exception e) {
 			System.out.println("\nError: " +e.toString() + " Try again.");
 		}

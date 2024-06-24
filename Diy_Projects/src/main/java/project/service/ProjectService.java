@@ -185,6 +185,13 @@ private Scanner scan = new Scanner(System.in);
 	}
 
 
+
+	public void addMaterial(Material material) {
+		dao.insertMaterial(material);
+		
+	}
+
+
 	
 
 
